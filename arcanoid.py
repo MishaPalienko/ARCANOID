@@ -141,8 +141,10 @@ while not game_over:
                 projectile = Projectile(monster.rect.centerx - 5, monster.rect.bottom, width=80, height=80)  # Увеличение размера
                 projectiles.append(projectile)
             break
+        # if monster_counter % 10 == 0:
+            # add one more ball
+            # ball = False
 
-    # Движение и проверка снарядов
     for projectile in projectiles[:]:
         projectile.move()
 
@@ -159,8 +161,11 @@ while not game_over:
     # Отображение объектов
     platform.draw()
     ball.draw()
+    
+    # Рисуем монстров
     for monster in monsters:
         monster.draw()
+    # Рисуем снаряды
     for projectile in projectiles:
         projectile.draw()  # Используем draw() для правильной отрисовки
 
