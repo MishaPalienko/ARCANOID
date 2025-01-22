@@ -1,12 +1,14 @@
-from initialization import game_state
+from initialization import game
 from Bomb import Bomb
+from Ball import Ball
 
-platform = game_state.platform
-monsters = game_state.monsters
-projectiles = game_state.projectiles
-max_speed = game_state.max_speed
-monster_counter = game_state.monster_counter
-game_over = game_state.game_over
+
+platform = game.platform
+monsters = game.monsters
+projectiles = game.projectiles
+max_speed = game.max_speed
+monster_counter = game.monster_counter
+game_over = game.game_over
 
 def moveBall(b):
     b.rect.x += b.dx
@@ -23,8 +25,12 @@ def moveBall(b):
         b.dy *= -1
 
     if b.rect.bottom >= 500:
-        game_state.game_over()
-        print("YOU LOSE")
+        # 1. Если мяч улетел то удаляем его из списка
+        game.removeBall(b)
+        # 2. Если мячей не осталось, то проигрыш
+        if len(game.balls) == 0:
+          game.gameOver()
+          print("YOU LOSE")
 
     # Проверка столкновений с монстрами
     for monster in monsters[:]:
@@ -47,7 +53,22 @@ def moveBall(b):
             if monster_counter % 35 == 0:  # Если номер монстра делится на 10, то создаем снаряд
                 projectile = Bomb(monster.rect.centerx - 5, monster.rect.bottom, width=80, height=80)  # Увеличение размера
                 projectiles.append(projectile)
+            
+            
+            if monster_counter % 2 == 0:  # Если номер монстра делится на 10, то создаем снаряд
+              game.addBall(Ball("./ball.png", 200, 300, 20, 20, b.dx, b.dy))
+              
+
             break
-        # if monster_counter % 10 == 0:
-            # add one more ball
-            # ball = False
+
+                
+
+
+
+
+
+
+
+
+
+

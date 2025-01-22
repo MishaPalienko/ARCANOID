@@ -21,8 +21,8 @@ class GameState:
         self.start_y = 5
         self.clock = pygame.time.Clock()
         self.back = (200, 255, 255)
-
-    def game_over(self):
+    
+    def gameOver(self):
         self.game_over = True
         self.platform_speed = 0
 
@@ -35,8 +35,13 @@ class GameState:
     def stop(self):
         self.move_right = False
         self.move_left = False
+    def addBall(self, ball):
+        self.balls.append(ball)
+    def removeBall(self, ball):
+        self.balls.remove(ball)
+
   
 pygame.display.set_caption("Game")
 
 
-game_state = GameState()
+game = GameState()
